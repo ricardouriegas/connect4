@@ -62,6 +62,8 @@ public class Game {
             System.out.println(player1.getName() + " wins");
             chronometer.stop();
             player1.setBestTime(chronometer.getElapsedTime());
+            System.out.println("Best time: " + player1.getBestTime() + " ms");
+            deleteGame("game.json");
             return true;
         }
 
@@ -70,6 +72,8 @@ public class Game {
             System.out.println(player2.getName() + " wins");
             chronometer.stop();
             player2.setBestTime(chronometer.getElapsedTime());
+            System.out.println("Best time: " + player2.getBestTime() + " ms");
+            deleteGame("game.json");
             return true;
         }
 
