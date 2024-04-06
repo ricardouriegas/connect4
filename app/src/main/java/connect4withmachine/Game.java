@@ -20,9 +20,12 @@ public class Game {
         this.player2 = player2;
         this.board = board;
         this.chronometer = chronometer;
-        // play();
     }
 
+    /**
+     * Play the game
+     * @return void
+     */
     public void play() {
         chronometer.start();
         do {
@@ -35,7 +38,6 @@ public class Game {
             player2.setHisTurn(false);
 
             if (player1.play(board) == -1) {
-                // TODO: save game
                 saveGame("game.json");
                 return;
             }
@@ -49,13 +51,19 @@ public class Game {
             player2.setHisTurn(true);
 
             if (player2.play(board) == -1) {
-                // TODO: save game
                 saveGame("game.json");
                 return;
             }
         } while (true);
     }
 
+    /**
+     * Function to check if there's a winner (player1 or player2)
+     * @param board
+     * @param player1
+     * @param player2
+     * @return boolean (true if there's a winner, false otherwise)
+     */
     public boolean theresAWinner(Board board, Player player1, Player player2) {
         if (board.isWinner(player1.getToken())) {
             board.printBoard();
@@ -80,6 +88,11 @@ public class Game {
         return false;
     }
 
+    /**
+     * Save the game to a file using Gson (the file name is game.json)
+     * @param filename
+     * @return void
+     */
     public void saveGame(String filename) {
         try (FileWriter writer = new FileWriter(filename)) {
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -109,6 +122,11 @@ public class Game {
         }
     }
     
+    /**
+     * Load the game from the file game.json
+     * @param filename
+     * @return Game (Player1, Player2, Board and Chronometer)
+     */
     public static Game loadGame(String filename) {
         try (FileReader reader = new FileReader(filename)) {
             Gson gson = new Gson();
@@ -143,7 +161,11 @@ public class Game {
         return null;
     }
     
-
+    /**
+     * Function to delete a file
+     * @param filename
+     * @return void
+     */
     public static void deleteGame(String filename) {
         File file = new File(filename);
         if (file.exists()) {
@@ -151,6 +173,11 @@ public class Game {
         }
     }
 
+    /**
+     * Function to check if a game is saved (it just checks if the file exists)
+     * @param filename
+     * @return boolean (true if the file exists, false otherwise)
+     */
     public static boolean isGameSaved(String filename) {
         File file = new File(filename);
         return file.exists() && !file.isDirectory();
