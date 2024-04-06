@@ -50,7 +50,7 @@ public class Game {
         if (board.isWinner(player1.getToken())) {
             board.printBoard();
             System.out.println(player1.getName() + " wins");
-            chronometer.stop();
+            // chronometer.stop();
             // player1.setBestTime(chronometer.getTime());
             return true;
         }
