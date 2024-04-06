@@ -9,8 +9,19 @@ public class App {
         app.run();
     }
 
-    void run () {
-        // connect 4 
+    void run() {
+        if (Game.isGameSaved("game.json")) {
+            System.out.println("Theres is a saved game, do you want to load it? (y/n)");
+            String opc = Utilities.readString();
+            if (opc.equals("y") || opc.equals("Y")) {
+                Game loadedGame = Game.loadGame("game.json");
+                loadedGame.play();
+            } else {
+                Game.deleteGame("game.json");
+            }
+        }
+
+        // connect 4
         int opc;
         do {
             menu();
@@ -27,10 +38,9 @@ public class App {
             }
         } while (opc != 0);
 
-        
     }
 
-    void menu (){
+    void menu() {
         System.out.println("WELCOME TO CONNECT 4");
         System.out.println("Choose an option");
         System.out.println("1) Player vs Player");
@@ -40,40 +50,46 @@ public class App {
 
     /**
      ************************************************************
-        * PlayerVsPlayer
-    ************************************************************
-        */
-    void PlayerVsPlayer () {
+     * PlayerVsPlayer
+     ************************************************************
+     */
+    void PlayerVsPlayer() {
         // Player vs Player
+
+        Chronometer chronometer = new Chronometer();
+
         System.out.println("Enter player 1 name");
         String name1 = Utilities.readString();
         System.out.println("Enter player 2 name");
         String name2 = Utilities.readString();
-        
+
         Player player1 = new Player(name1, 'X');
         Player player2 = new Player(name2, 'O');
-        
+
         Board board = new Board();
-        Game game = new Game(player1, player2, board);
+        Game game = new Game(player1, player2, board, chronometer);
 
         game.play();
+
     }
 
     /**
      ************************************************************
-        * PlayerVsPC
-    ************************************************************
-        */
-    void PlayerVsPC () {
+     * PlayerVsPC
+     ************************************************************
+     */
+    void PlayerVsPC() {
         // Player vs PC
+        Chronometer chronometer = new Chronometer();
+
         System.out.println("Enter player name");
         String name = Utilities.readString();
-        
+
         Player player = new Player(name, 'X');
         PC pc = new PC("PC", 'O');
 
         Board board = new Board();
-        Game game = new Game(player, pc, board);
+        Game game = new Game(player, pc, board, chronometer);
 
         game.play();
     }

@@ -1,5 +1,13 @@
 package connect4withmachine;
 
+// gson import
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
+import java.io.*;
+
 public class Game {
     private Player player1;
     private Player player2;
@@ -7,16 +15,16 @@ public class Game {
     private Chronometer chronometer = new Chronometer();
     
 
-    public Game(Player player1, Player player2, Board board) {
+    public Game(Player player1, Player player2, Board board, Chronometer chronometer) {
         this.player1 = player1;
         this.player2 = player2;
         this.board = board;
-        play();
+        this.chronometer = chronometer;
+        // play();
     }
 
     public void play() {
-        // chronometer.start();
-        // TODO: detect if there a saved game and ask the user if he wants to continue
+        chronometer.start();
         do {
             // check if someone won
             if (theresAWinner(board, player1, player2))
@@ -28,6 +36,7 @@ public class Game {
 
             if (player1.play(board) == -1) {
                 // TODO: save game
+                saveGame("game.json");
                 return;
             }
 
@@ -41,6 +50,7 @@ public class Game {
 
             if (player2.play(board) == -1) {
                 // TODO: save game
+                saveGame("game.json");
                 return;
             }
         } while (true);
@@ -50,22 +60,66 @@ public class Game {
         if (board.isWinner(player1.getToken())) {
             board.printBoard();
             System.out.println(player1.getName() + " wins");
-            // chronometer.stop();
-            // player1.setBestTime(chronometer.getTime());
+            chronometer.stop();
+            player1.setBestTime(chronometer.getElapsedTime());
             return true;
         }
 
         if (board.isWinner(player2.getToken())) {
             board.printBoard();
             System.out.println(player2.getName() + " wins");
-            // player2.setBestTime(chronometer.getTime());
+            chronometer.stop();
+            player2.setBestTime(chronometer.getElapsedTime());
             return true;
         }
 
         return false;
     }
 
-    public void saveGame() {
+    public void saveGame(String filename) {
+        try (FileWriter writer = new FileWriter(filename)) {
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            JsonObject gameJson = new JsonObject();
+            gameJson.add("player1", gson.toJsonTree(player1));
+            gameJson.add("player2", gson.toJsonTree(player2));
+            gameJson.add("board", gson.toJsonTree(board));
+            gameJson.addProperty("chronometerStartTime", chronometer.getStartTime());
+            gameJson.addProperty("chronometerRunning", chronometer.isRunning());
+            gson.toJson(gameJson, writer);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
+    public static Game loadGame(String filename) {
+        try (FileReader reader = new FileReader(filename)) {
+            Gson gson = new Gson();
+            JsonParser parser = new JsonParser();
+            JsonObject gameJson = parser.parse(reader).getAsJsonObject();
+            Player player1 = gson.fromJson(gameJson.get("player1"), Player.class);
+            Player player2 = gson.fromJson(gameJson.get("player2"), Player.class);
+            Board board = gson.fromJson(gameJson.get("board"), Board.class);
+            Chronometer chronometer = new Chronometer();
+            chronometer.setStartTime(gameJson.get("chronometerStartTime").getAsLong());
+            if (gameJson.get("chronometerRunning").getAsBoolean()) {
+                chronometer.start();
+            }
+            return new Game(player1, player2, board, chronometer);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static void deleteGame(String filename) {
+        File file = new File(filename);
+        if (file.exists()) {
+            file.delete();
+        }
+    }
+
+    public static boolean isGameSaved(String filename) {
+        File file = new File(filename);
+        return file.exists() && !file.isDirectory();
     }
 }
