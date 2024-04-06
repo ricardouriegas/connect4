@@ -22,9 +22,6 @@ public class Chronometer {
         } else {
             elapsed = (stopTime - startTime);
         }
-        
-        // transform to seconds 
-        elapsed = elapsed / 1000;
 
         return elapsed;
     }
