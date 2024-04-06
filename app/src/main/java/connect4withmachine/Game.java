@@ -80,36 +80,65 @@ public class Game {
         try (FileWriter writer = new FileWriter(filename)) {
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             JsonObject gameJson = new JsonObject();
+    
+            // Serialize player1
             gameJson.add("player1", gson.toJsonTree(player1));
-            gameJson.add("player2", gson.toJsonTree(player2));
+    
+            // Serialize player2
+            if (player2 instanceof PC) {
+                // If player2 is an instance of PCPlayer, create a new PCPlayer object
+                PC pcPlayer = new PC("PC", 'O');
+                gameJson.add("player2", gson.toJsonTree(pcPlayer));
+            } else {
+                // Serialize player2 normally
+                gameJson.add("player2", gson.toJsonTree(player2));
+            }
+    
+            // Serialize board and chronometer
             gameJson.add("board", gson.toJsonTree(board));
             gameJson.addProperty("chronometerStartTime", chronometer.getStartTime());
             gameJson.addProperty("chronometerRunning", chronometer.isRunning());
+    
             gson.toJson(gameJson, writer);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
+    
     public static Game loadGame(String filename) {
         try (FileReader reader = new FileReader(filename)) {
             Gson gson = new Gson();
             JsonParser parser = new JsonParser();
             JsonObject gameJson = parser.parse(reader).getAsJsonObject();
+    
+            // Deserialize player1
             Player player1 = gson.fromJson(gameJson.get("player1"), Player.class);
-            Player player2 = gson.fromJson(gameJson.get("player2"), Player.class);
+    
+            // Deserialize player2
+            Player player2;
+            if (gameJson.get("player2").getAsJsonObject().get("name").getAsString().equals("PC")) {
+                // If player2 is PCPlayer, deserialize as PCPlayer
+                player2 = gson.fromJson(gameJson.get("player2"), PC.class);
+            } else {
+                // Deserialize player2 normally
+                player2 = gson.fromJson(gameJson.get("player2"), Player.class);
+            }
+    
+            // Deserialize board and chronometer
             Board board = gson.fromJson(gameJson.get("board"), Board.class);
             Chronometer chronometer = new Chronometer();
             chronometer.setStartTime(gameJson.get("chronometerStartTime").getAsLong());
             if (gameJson.get("chronometerRunning").getAsBoolean()) {
                 chronometer.start();
             }
+    
             return new Game(player1, player2, board, chronometer);
         } catch (IOException e) {
             e.printStackTrace();
         }
         return null;
     }
+    
 
     public static void deleteGame(String filename) {
         File file = new File(filename);

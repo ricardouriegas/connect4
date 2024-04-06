@@ -60,8 +60,17 @@ public class App {
 
         System.out.println("Enter player 1 name");
         String name1 = Utilities.readString();
+        if (name1.equals("PC") || name1.equals("pc")){
+            System.out.println("That's an invalid name");
+            return;
+        }
+    
         System.out.println("Enter player 2 name");
         String name2 = Utilities.readString();
+        if (name2.equals("PC") || name2.equals("pc")){
+            System.out.println("That's an invalid name");
+            return;
+        }
 
         Player player1 = new Player(name1, 'X');
         Player player2 = new Player(name2, 'O');
