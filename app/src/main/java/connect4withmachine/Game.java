@@ -142,7 +142,7 @@ public class Game {
                 // If player2 is PCPlayer, deserialize as PCPlayer
                 player2 = gson.fromJson(gameJson.get("player2"), PC.class);
             } else {
-                // Deserialize player2 normally
+                // Deserialize player2 
                 player2 = gson.fromJson(gameJson.get("player2"), Player.class);
             }
     
@@ -182,4 +182,11 @@ public class Game {
         File file = new File(filename);
         return file.exists() && !file.isDirectory();
     }
+
+    /**
+     * Function to create a file 
+     * @param filename
+     * @return void
+     */
+    
 }

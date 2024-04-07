@@ -39,60 +39,44 @@ public class Board {
         return true;
     }
 
-    public boolean checkVertical(int row, int col, char token, int count) {
+    private boolean checkWin(char[][] board, int row, int col, char token, int dr, int dc, int count) {
         if (count == 4) {
             return true;
         }
-
-        if (row + 1 < rows && board[row + 1][col] == token) {
-            return checkVertical(row + 1, col, token, count + 1);
+    
+        int nextRow = row + dr;
+        int nextCol = col + dc;
+    
+        if (isValidCell(nextRow, nextCol) && board[nextRow][nextCol] == token) {
+            return checkWin(board, nextRow, nextCol, token, dr, dc, count + 1);
         }
-
+        
         return false;
     }
-
-    public boolean checkHorizontal(int row, int col, char token, int count) {
-        if (count == 4) {
-            return true;
-        }
-
-        if (col + 1 < cols && board[row][col + 1] == token) {
-            return checkHorizontal(row, col + 1, token, count + 1);
-        }
-
-        return false;
+    
+    
+    private boolean isValidCell(int row, int col) {
+        return row >= 0 && row < rows && col >= 0 && col < cols;
     }
-
-    public boolean checkDiagonal(int row, int col, char token, int count) {
-        if (count == 4) {
-            return true;
-        }
-
-        if (row + 1 < rows && col + 1 < cols && board[row + 1][col + 1] == token) {
-            return checkDiagonal(row + 1, col + 1, token, count + 1);
-        }
-
-        if (row - 1 >= 0 && col + 1 < cols && board[row - 1][col + 1] == token) {
-            return checkDiagonal(row - 1, col + 1, token, count + 1);
-        }
-
-        return false;
-    }
+    
+    
 
     public boolean isWinner(char token) {
-        // check vertical, horizontal and diagonal
+        int[][] directions = { { 1, 0 }, { 0, 1 }, { 1, 1 }, { -1, 1 } }; 
+
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
                 if (board[i][j] == token) {
-                    if (checkVertical(i, j, token, 1)
-                            || checkHorizontal(i, j, token, 1)
-                            || checkDiagonal(i, j, token, 1)) {
-                        return true;
+                    for (int[] dir : directions) {
+                        int dr = dir[0];
+                        int dc = dir[1];
+                        if (checkWin(board, i, j, token, dr, dc, 1)) {
+                            return true;
+                        }
                     }
                 }
             }
         }
-
         return false;
     }
 

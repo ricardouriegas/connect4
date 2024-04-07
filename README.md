@@ -11,4 +11,4 @@ The game should have the following:
 - [x] The game should be able to save and load a game
 - [x] The game should have a chronometer
 - [ ] Should list a rank of the best times with the name of the player on the main menu (classified by Player vs Player and Player vs PC)
-- [ ] The player should be able to suspend the game and resume it later using "X"
+- [X] The player should be able to suspend the game and resume it later using "X"

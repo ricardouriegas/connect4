@@ -14,7 +14,7 @@ public class PC extends Player {
             }
 
             board.putToken(getToken(), i);
-            int score = minmax(board, 4, true); // 6 is great but it takes a lot of processing
+            int score = minmax(board, 5, true); // 6 is great but it takes a lot of processing
             board.removeToken(i);
 
             if (score > bestScore) {
