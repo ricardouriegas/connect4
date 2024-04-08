@@ -6,24 +6,28 @@ public class Chronometer {
     private boolean running;
 
     public void start() {
-        this.startTime = System.currentTimeMillis();
+        this.startTime = System.nanoTime();
         this.running = true;
     }
 
     public void stop() {
-        this.stopTime = System.currentTimeMillis();
+        this.stopTime = System.nanoTime();
         this.running = false;
     }
 
-    public long getElapsedTime() {
+    public String getElapsedTime() {
         long elapsed;
         if (running) {
-            elapsed = (System.currentTimeMillis() - startTime);
+            elapsed = (System.nanoTime() - startTime);
         } else {
             elapsed = (stopTime - startTime);
         }
 
-        return elapsed;
+        long minutes = (elapsed / 1_000_000_000) / 60;
+        long seconds = (elapsed / 1_000_000_000) % 60;
+        long microSeconds = (elapsed % 1_000_000);
+
+        return String.format("%d min, %d sec, %d microsec", minutes, seconds, microSeconds);
     }
 
     public void reset() {
@@ -43,6 +47,4 @@ public class Chronometer {
     public boolean isRunning() {
         return running;
     }
-
-
 }

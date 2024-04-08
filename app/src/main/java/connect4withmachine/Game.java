@@ -79,6 +79,7 @@ public class Game {
             board.printBoard();
             System.out.println(player2.getName() + " wins");
             chronometer.stop();
+            // parse int 
             player2.setBestTime(chronometer.getElapsedTime());
             System.out.println("Best time: " + player2.getBestTime() + " s");
             deleteGame("game.json");
