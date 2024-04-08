@@ -47,4 +47,42 @@ public class Chronometer {
     public boolean isRunning() {
         return running;
     }
+
+    public long getMicroSeconds() {
+        long elapsed;
+        if (running) {
+            elapsed = (System.nanoTime() - startTime);
+        } else {
+            elapsed = (stopTime - startTime);
+        }
+
+        return elapsed % 1_000_000;
+    }
+
+    public long getSeconds() {
+        long elapsed;
+        if (running) {
+            elapsed = (System.nanoTime() - startTime);
+        } else {
+            elapsed = (stopTime - startTime);
+        }
+
+        return (elapsed / 1_000_000_000) % 60;
+    }
+
+    public long getMinutes() {
+        long elapsed;
+        if (running) {
+            elapsed = (System.nanoTime() - startTime);
+        } else {
+            elapsed = (stopTime - startTime);
+        }
+
+        return (elapsed / 1_000_000_000) / 60;
+    }
+
+    public void setTime(long minutes, long seconds, long microSeconds) {
+        long elapsed = (minutes * 60 * 1_000_000_000) + (seconds * 1_000_000_000) + microSeconds;
+        this.startTime = System.nanoTime() - elapsed;
+    }
 }
