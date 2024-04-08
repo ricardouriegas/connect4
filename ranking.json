@@ -19,7 +19,28 @@
       },
       "token": "O",
       "isHisTurn": true
+    },
+    {
+      "name": "2",
+      "time": {
+        "startTime": 17388471439557,
+        "stopTime": 17398374689791,
+        "running": false
+      },
+      "token": "O",
+      "isHisTurn": true
     }
   ],
-  "playerMachineList": []
+  "playerMachineList": [
+    {
+      "name": "jose",
+      "time": {
+        "startTime": 17212876469762,
+        "stopTime": 17224594207640,
+        "running": false
+      },
+      "token": "X",
+      "isHisTurn": true
+    }
+  ]
 }

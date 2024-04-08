@@ -56,6 +56,7 @@ public class App {
         RankList rankList = new RankList();
         // clear screen
         System.out.println("\033[H\033[2J");
+        System.out.println("=====RANKING=====");
         if (rankList.getPlayerList().size() > 0 || rankList.getPlayerMachineList().size() > 0) {
             System.out.println(rankList);
         } else {

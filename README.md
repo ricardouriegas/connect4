@@ -10,5 +10,5 @@ The game should have the following:
 - [x] The game should be able to detect a win or a draw
 - [x] The game should be able to save and load a game
 - [x] The game should have a chronometer
-- [ ] Should list a rank of the best times with the name of the player on the main menu (classified by Player vs Player and Player vs PC)
-- [X] The player should be able to suspend the game and resume it later using "X"
+- [x] Should list a rank of the best times with the name of the player on the main menu (classified by Player vs Player and Player vs PC)
+- [x] The player should be able to suspend the game and resume it later using "X"

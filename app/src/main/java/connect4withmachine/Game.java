@@ -85,6 +85,10 @@ public class Game {
                 rankList.saveRanking();
             }
 
+            // enter to continue
+            System.out.println("Press enter to continue");
+            Utilities.readString();
+            
             return true;
         }
 
@@ -104,6 +108,9 @@ public class Game {
                 rankList.addPlayer(player2);
                 rankList.saveRanking();
             }
+            // enter to continue
+            System.out.println("Press enter to continue");
+            Utilities.readString();
 
             return true;
         }
