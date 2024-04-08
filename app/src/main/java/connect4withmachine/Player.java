@@ -2,26 +2,26 @@ package connect4withmachine;
 
 public class Player {
     private String name;
-    private String bestTime;
+    private Chronometer time;
     private char token;
     private boolean isHisTurn;
 
     public Player(String name, char token) {
         this.name = name;
         this.token = token;
-        this.bestTime = "00:00:00";
+        this.time = null;
     }
 
     public String getName() {
         return name;
     }
 
-    public String getBestTime() {
-        return bestTime;
+    public Chronometer getTime() {
+        return time;
     }
     
-    public void setBestTime(String bestTime) {
-        this.bestTime = bestTime;
+    public void setTime(Chronometer time) {
+        this.time = time;
     }
 
     public char getToken() {

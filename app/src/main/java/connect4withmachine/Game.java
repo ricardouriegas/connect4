@@ -13,7 +13,6 @@ public class Game {
     private Player player2;
     private Board board;
     private Chronometer chronometer = new Chronometer();
-    
 
     public Game(Player player1, Player player2, Board board, Chronometer chronometer) {
         this.player1 = player1;
@@ -24,6 +23,7 @@ public class Game {
 
     /**
      * Play the game
+     * 
      * @return void
      */
     public void play() {
@@ -59,6 +59,7 @@ public class Game {
 
     /**
      * Function to check if there's a winner (player1 or player2)
+     * 
      * @param board
      * @param player1
      * @param player2
@@ -69,9 +70,21 @@ public class Game {
             board.printBoard();
             System.out.println(player1.getName() + " wins");
             chronometer.stop();
-            player1.setBestTime(chronometer.getElapsedTime());
-            System.out.println("Best time: " + player1.getBestTime() + " s");
+            player1.setTime(chronometer);
+            System.out.println("Best time: " + player1.getTime().getElapsedTime());
             deleteGame("game.json");
+
+            // rank list
+            if (player2 instanceof PC) {
+                RankList rankList = new RankList();
+                rankList.addPlayerMachine(player1);
+                rankList.saveRanking();
+            } else {
+                RankList rankList = new RankList();
+                rankList.addPlayer(player1);
+                rankList.saveRanking();
+            }
+
             return true;
         }
 
@@ -79,10 +92,19 @@ public class Game {
             board.printBoard();
             System.out.println(player2.getName() + " wins");
             chronometer.stop();
-            // parse int 
-            player2.setBestTime(chronometer.getElapsedTime());
-            System.out.println("Best time: " + player2.getBestTime() + " s");
+            // parse int
+            player2.setTime(chronometer);
+            System.out.println("Best time: " + player2.getTime().getElapsedTime());
             deleteGame("game.json");
+
+            // rank list
+            if (!(player2 instanceof PC)) {
+                // if the player 2 is a human, then we add it to the rank list
+                RankList rankList = new RankList();
+                rankList.addPlayer(player2);
+                rankList.saveRanking();
+            }
+
             return true;
         }
 
@@ -91,6 +113,7 @@ public class Game {
 
     /**
      * Save the game to a file using Gson (the file name is game.json)
+     * 
      * @param filename
      * @return void
      */
@@ -98,10 +121,10 @@ public class Game {
         try (FileWriter writer = new FileWriter(filename)) {
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             JsonObject gameJson = new JsonObject();
-    
+
             // Serialize player1
             gameJson.add("player1", gson.toJsonTree(player1));
-    
+
             // Serialize player2
             if (player2 instanceof PC) {
                 // If player2 is an instance of PCPlayer, create a new PCPlayer object
@@ -111,20 +134,21 @@ public class Game {
                 // Serialize player2 normally
                 gameJson.add("player2", gson.toJsonTree(player2));
             }
-    
+
             // Serialize board and chronometer
             gameJson.add("board", gson.toJsonTree(board));
             gameJson.addProperty("chronometerStartTime", chronometer.getStartTime());
             gameJson.addProperty("chronometerRunning", chronometer.isRunning());
-    
+
             gson.toJson(gameJson, writer);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-    
+
     /**
      * Load the game from the file game.json
+     * 
      * @param filename
      * @return Game (Player1, Player2, Board and Chronometer)
      */
@@ -133,20 +157,20 @@ public class Game {
             Gson gson = new Gson();
             JsonParser parser = new JsonParser();
             JsonObject gameJson = parser.parse(reader).getAsJsonObject();
-    
+
             // Deserialize player1
             Player player1 = gson.fromJson(gameJson.get("player1"), Player.class);
-    
+
             // Deserialize player2
             Player player2;
             if (gameJson.get("player2").getAsJsonObject().get("name").getAsString().equals("PC")) {
                 // If player2 is PCPlayer, deserialize as PCPlayer
                 player2 = gson.fromJson(gameJson.get("player2"), PC.class);
             } else {
-                // Deserialize player2 
+                // Deserialize player2
                 player2 = gson.fromJson(gameJson.get("player2"), Player.class);
             }
-    
+
             // Deserialize board and chronometer
             Board board = gson.fromJson(gameJson.get("board"), Board.class);
             Chronometer chronometer = new Chronometer();
@@ -154,16 +178,17 @@ public class Game {
             if (gameJson.get("chronometerRunning").getAsBoolean()) {
                 chronometer.start();
             }
-    
+
             return new Game(player1, player2, board, chronometer);
         } catch (IOException e) {
             e.printStackTrace();
         }
         return null;
     }
-    
+
     /**
      * Function to delete a file
+     * 
      * @param filename
      * @return void
      */
@@ -176,6 +201,7 @@ public class Game {
 
     /**
      * Function to check if a game is saved (it just checks if the file exists)
+     * 
      * @param filename
      * @return boolean (true if the file exists, false otherwise)
      */
@@ -185,9 +211,10 @@ public class Game {
     }
 
     /**
-     * Function to create a file 
+     * Function to create a file
+     * 
      * @param filename
      * @return void
      */
-    
+
 }

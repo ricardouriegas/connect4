@@ -10,6 +10,7 @@ public class App {
     }
 
     void run() {
+        // check if there is a saved game
         if (Game.isGameSaved("game.json")) {
             System.out.println("Theres is a saved game, do you want to load it? (y/n)");
             String opc = Utilities.readString();
@@ -21,9 +22,12 @@ public class App {
             }
         }
 
+        //  
+
         // connect 4
         int opc;
         do {
+            printRanking();
             menu();
             opc = Utilities.readInt();
             switch (opc) {
@@ -46,6 +50,17 @@ public class App {
         System.out.println("1) Player vs Player");
         System.out.println("2) Player vs PC");
         System.out.println("0) Exit");
+    }
+
+    void printRanking() {
+        RankList rankList = new RankList();
+        // clear screen
+        System.out.println("\033[H\033[2J");
+        if (rankList.getPlayerList().size() > 0 || rankList.getPlayerMachineList().size() > 0) {
+            System.out.println(rankList);
+        } else {
+            System.out.println("No ranking yet");
+        }
     }
 
     /**

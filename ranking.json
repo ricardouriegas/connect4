@@ -1,0 +1,25 @@
+{
+  "playerList": [
+    {
+      "name": "1",
+      "time": {
+        "startTime": 16617146927955,
+        "stopTime": 16620532769117,
+        "running": false
+      },
+      "token": "X",
+      "isHisTurn": true
+    },
+    {
+      "name": "2",
+      "time": {
+        "startTime": 16633149830116,
+        "stopTime": 16637236933854,
+        "running": false
+      },
+      "token": "O",
+      "isHisTurn": true
+    }
+  ],
+  "playerMachineList": []
+}
