@@ -44,6 +44,10 @@ public class Chronometer {
         return startTime;
     }
 
+    public long getEndTime() {
+        return stopTime;
+    }
+
     public boolean isRunning() {
         return running;
     }

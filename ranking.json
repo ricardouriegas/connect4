@@ -1,42 +1,32 @@
 {
   "playerList": [
     {
-      "name": "1",
+      "name": "uri",
       "time": {
-        "startTime": 16617146927955,
-        "stopTime": 16620532769117,
+        "startTime": 32932565580299,
+        "stopTime": 32934593735010,
         "running": false
       },
       "token": "X",
       "isHisTurn": true
     },
     {
-      "name": "2",
+      "name": "jose",
       "time": {
-        "startTime": 16633149830116,
-        "stopTime": 16637236933854,
+        "startTime": 32832783766476,
+        "stopTime": 32841616553036,
         "running": false
       },
-      "token": "O",
-      "isHisTurn": true
-    },
-    {
-      "name": "2",
-      "time": {
-        "startTime": 17388471439557,
-        "stopTime": 17398374689791,
-        "running": false
-      },
-      "token": "O",
+      "token": "X",
       "isHisTurn": true
     }
   ],
   "playerMachineList": [
     {
-      "name": "jose",
+      "name": "uri",
       "time": {
-        "startTime": 17212876469762,
-        "stopTime": 17224594207640,
+        "startTime": 32899762803616,
+        "stopTime": 32915488963530,
         "running": false
       },
       "token": "X",

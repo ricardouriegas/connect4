@@ -9,7 +9,8 @@ import com.google.gson.JsonParser;
 import java.util.ArrayList;
 
 public class RankList {
-    // 2 ordered lists, one for the Player vs Player and the other one for the Player vs Machine
+    // 2 ordered lists, one for the Player vs Player and the other one for the
+    // Player vs Machine
     private ArrayList<Player> playerList = new ArrayList<>();
     private ArrayList<Player> playerMachineList = new ArrayList<>();
 
@@ -26,11 +27,12 @@ public class RankList {
         return playerMachineList;
     }
 
-    public void addPlayer(Player player) {
-        // order the list by the the best time
+    public void addPlayer(Player player) {        
+        // inster by order
         if (playerList.isEmpty()) {
             playerList.add(player);
         } else {
+            // insert into the list by order
             for (int i = 0; i < playerList.size(); i++) {
                 if (compareTime(player.getTime(), playerList.get(i).getTime()) == -1) {
                     playerList.add(i, player);
@@ -39,7 +41,6 @@ public class RankList {
             }
             playerList.add(player);
         }
-
     }
 
     public void addPlayerMachine(Player player) {
@@ -47,6 +48,7 @@ public class RankList {
         if (playerMachineList.isEmpty()) {
             playerMachineList.add(player);
         } else {
+            // insert into the list by order
             for (int i = 0; i < playerMachineList.size(); i++) {
                 if (compareTime(player.getTime(), playerMachineList.get(i).getTime()) == -1) {
                     playerMachineList.add(i, player);
@@ -56,27 +58,28 @@ public class RankList {
             playerMachineList.add(player);
         }
     }
-    
+
     /**
-     * This function compares the time of two players, 
-     * it returns -1 if the time of the first player is less than the time of the second player
-     * it returns 1 if the time of the first player is greater than the time of the second player
-     * it returns 0 if the time of the first player is equal to the time of the second player
+     * This function compares the time of two players,
+     * it returns -1 if the time of the first player is less than the time of the
+     * second player
+     * it returns 1 if the time of the first player is greater than the time of the
+     * second player
+     * it returns 0 if the time of the first player is equal to the time of the
+     * second player
+     * 
      * @param time1
      * @param time2
      * @return int
      */
     public int compareTime(Chronometer time1, Chronometer time2) {
-        long elapsed1 = time1.getStartTime();
-        long elapsed2 = time2.getStartTime();
+        long minutes1 = time1.getMinutes();
+        long seconds1 = time1.getSeconds();
+        long microSeconds1 = time1.getMicroSeconds();
 
-        long minutes1 = (elapsed1 / 1_000_000_000) / 60;
-        long seconds1 = (elapsed1 / 1_000_000_000) % 60;
-        long microSeconds1 = (elapsed1 % 1_000_000);
-
-        long minutes2 = (elapsed2 / 1_000_000_000) / 60;
-        long seconds2 = (elapsed2 / 1_000_000_000) % 60;
-        long microSeconds2 = (elapsed2 % 1_000_000);
+        long minutes2 = time2.getMinutes();
+        long seconds2 = time2.getSeconds();
+        long microSeconds2 = time2.getMicroSeconds();
 
         if (minutes1 < minutes2) {
             return -1;
@@ -101,6 +104,7 @@ public class RankList {
 
     /**
      * This function recovers the ranking from the file
+     * 
      * @return void
      */
     public void recoverRanking() {
@@ -130,6 +134,7 @@ public class RankList {
 
     /**
      * This function saves the ranking in the file
+     * 
      * @return void
      */
     public void saveRanking() {
@@ -156,17 +161,18 @@ public class RankList {
         StringBuilder sb = new StringBuilder();
         sb.append("===Player vs Player===\n");
         for (int i = 0; i < playerList.size(); i++) {
-            sb.append(i + 1).append(". Name: ").append(playerList.get(i).getName()).append(" \n\tTime:").append(playerList.get(i).getTime().getElapsedTime()).append("\n");
+            sb.append(i + 1).append(". Name: ").append(playerList.get(i).getName()).append(" \n\tTime:")
+                    .append(playerList.get(i).getTime().getElapsedTime()).append("\n");
         }
 
         sb.append("===Player vs Machine===\n");
         for (int i = 0; i < playerMachineList.size(); i++) {
-            sb.append(i + 1).append(". Name: ").append(playerMachineList.get(i).getName()).append(" \n\tTime:").append(playerMachineList.get(i).getTime().getElapsedTime()).append("\n");
+            sb.append(i + 1).append(". Name: ").append(playerMachineList.get(i).getName()).append(" \n\tTime:")
+                    .append(playerMachineList.get(i).getTime().getElapsedTime()).append("\n");
         }
         sb.append("\n");
 
         return sb.toString();
     }
-
 
 }
