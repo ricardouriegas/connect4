@@ -1,3 +1,9 @@
+/**
+ * @Author: Ricardo Uriegas
+ * @Date: 09/04/2024
+ * @Description: This class represents the game
+ * @Version: 1
+ */
 package connect4withmachine;
 
 // gson import

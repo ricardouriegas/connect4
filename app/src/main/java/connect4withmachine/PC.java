@@ -1,3 +1,9 @@
+/**
+ * @Author: Ricardo Uriegas
+ * @Date: 09/04/2024
+ * @Description: This class represents the PC player, it extends from Player
+ * @Version: 1
+ */
 package connect4withmachine;
 
 public class PC extends Player {

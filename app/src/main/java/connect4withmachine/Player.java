@@ -1,3 +1,9 @@
+/**
+ * @Author: Ricardo Uriegas
+ * @Date: 09/04/2024
+ * @Description: This class represents the player
+ * @Version: 1
+ */
 package connect4withmachine;
 
 public class Player {

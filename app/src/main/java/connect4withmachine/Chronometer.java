@@ -1,3 +1,9 @@
+/**
+ * @Author: Ricardo Uriegas
+ * @Date: 09/04/2024
+ * @Version: 1
+ * @Description: This class represents the chronometer
+ */
 package connect4withmachine;
 
 public class Chronometer {
