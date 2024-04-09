@@ -126,5 +126,11 @@ public class Utilities {
         }
     }
 
-
+    /**
+     * Function to exit the program
+     * @return void
+     */
+    public static void exit() {
+        System.exit(0);
+    }
 }

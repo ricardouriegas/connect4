@@ -56,7 +56,7 @@ public class Player {
         col = Utilities.readString();
 
         if (col.equals("x") || col.equals("X")) {
-            System.out.println("Game exited");
+            System.out.println("Game exited (CAUTION: If you start another game, the previous one will be lost)");
             return -1;
         }
 

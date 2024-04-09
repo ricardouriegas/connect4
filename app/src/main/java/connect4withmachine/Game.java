@@ -46,7 +46,7 @@ public class Game {
 
             if (player1.play(board) == -1) {
                 saveGame("game.json");
-                return;
+                Utilities.exit();
             }
 
             // check if someone won
@@ -59,7 +59,7 @@ public class Game {
 
             if (player2.play(board) == -1) {
                 saveGame("game.json");
-                return;
+                Utilities.exit();
             }
         } while (true);
     }
