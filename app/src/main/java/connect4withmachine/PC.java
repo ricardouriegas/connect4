@@ -5,6 +5,11 @@ public class PC extends Player {
         super(name, token);
     }
 
+    /**
+     * Function to realize a move 
+     * @param board
+     * @return int
+     */
     public int play(Board board) {
         int bestScore = Integer.MIN_VALUE;
         int bestCol = 0;
@@ -27,7 +32,13 @@ public class PC extends Player {
         return bestCol;
     }
 
-    // minmax algorithm
+    /**
+     * MinMax algorithm
+     * @param board
+     * @param depth
+     * @param isMaximizing
+     * @return
+     */
     public int minmax(Board board, int depth, boolean isMaximizing) {
         if (depth == 0 || board.isFull()) {
             return board.evaluateBoard(board, getToken());

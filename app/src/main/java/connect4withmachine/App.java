@@ -9,6 +9,10 @@ public class App {
         app.run();
     }
 
+    /**
+     * Run the program
+     * @return void
+     */
     void run() {
         // check if there is a saved game
         if (Game.isGameSaved("game.json")) {
@@ -43,6 +47,9 @@ public class App {
         } while (opc != 0);
     }
 
+    /**
+     * Menu
+     */
     void menu() {
         System.out.println("WELCOME TO CONNECT 4");
         System.out.println("Choose an option");
@@ -51,6 +58,10 @@ public class App {
         System.out.println("0) Exit");
     }
 
+    /**
+     * Function to print the ranking
+     * @return void
+     */
     void printRanking() {
         RankList rankList = new RankList();
         // clear screen
@@ -65,12 +76,11 @@ public class App {
 
     /**
      ************************************************************
-     * PlayerVsPlayer
+     * Player Vs Player
      ************************************************************
      */
     void PlayerVsPlayer() {
         // Player vs Player
-
         Chronometer chronometer = new Chronometer();
 
         System.out.println("Enter player 1 name");
@@ -99,7 +109,7 @@ public class App {
 
     /**
      ************************************************************
-     * PlayerVsPC
+     * Player Vs PC
      ************************************************************
      */
     void PlayerVsPC() {

@@ -6,12 +6,20 @@ public class Player {
     private char token;
     private boolean isHisTurn;
 
+    /**
+     * Constructor
+     * @param name
+     * @param token
+     */
     public Player(String name, char token) {
         this.name = name;
         this.token = token;
         this.time = null;
     }
 
+    /**
+     * Getters and setters
+     */
     public String getName() {
         return name;
     }
@@ -37,7 +45,7 @@ public class Player {
     }
 
     /**
-     * Play
+     * Function to realize a move
      * @param board
      * @return
      */
@@ -52,8 +60,7 @@ public class Player {
             return -1;
         }
 
-        while (!board.putToken(getToken(), Integer.parseInt(col) - 1)) {
-            System.out.println("Column is full, please choose another one");
+        while (!board.putToken(getToken(), Utilities.stringToInt(col) - 1)) {
             col = Utilities.readString();
         }
 

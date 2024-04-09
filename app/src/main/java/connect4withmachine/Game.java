@@ -14,6 +14,13 @@ public class Game {
     private Board board;
     private Chronometer chronometer = new Chronometer();
 
+    /**
+     * Constructor
+     * @param player1
+     * @param player2
+     * @param board
+     * @param chronometer
+     */
     public Game(Player player1, Player player2, Board board, Chronometer chronometer) {
         this.player1 = player1;
         this.player2 = player2;
@@ -120,7 +127,7 @@ public class Game {
 
     /**
      * Save the game to a file using Gson (the file name is game.json)
-     * 
+     * TODO: Use Utilities.writeFile instead of FileWriter
      * @param filename
      * @return void
      */
@@ -155,7 +162,7 @@ public class Game {
 
     /**
      * Load the game from the file game.json
-     * 
+     * TODO: Use Utilities.readFile instead of FileReader
      * @param filename
      * @return Game (Player1, Player2, Board and Chronometer)
      */
@@ -197,7 +204,7 @@ public class Game {
 
     /**
      * Function to delete a file
-     * 
+     * Use 
      * @param filename
      * @return void
      */
@@ -218,12 +225,5 @@ public class Game {
         File file = new File(filename);
         return file.exists() && !file.isDirectory();
     }
-
-    /**
-     * Function to create a file
-     * 
-     * @param filename
-     * @return void
-     */
 
 }

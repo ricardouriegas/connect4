@@ -6,7 +6,12 @@ import java.io.*;
 public class Utilities {
     private static Scanner in = new Scanner(System.in);
 
-    public static int readInt () {
+    /**
+     * Function that serves to read a valid int
+     * 
+     * @return int
+     */
+    public static int readInt() {
         // here should be an infinite try catch until the user put a correct int
         do {
             try {
@@ -17,7 +22,12 @@ public class Utilities {
         } while (true);
     }
 
-    public static String readString () {
+    /**
+     * This function serves to read a valid string
+     * 
+     * @return String
+     */
+    public static String readString() {
         do {
             try {
                 return in.nextLine();
@@ -27,7 +37,13 @@ public class Utilities {
         } while (true);
     }
 
-    public static void sleep (int time) {
+    /**
+     * The purpose of the function is sleep the program certain time
+     * 
+     * @param time
+     * @return void
+     */
+    public static void sleep(int time) {
         try {
             Thread.sleep(time);
         } catch (InterruptedException e) {
@@ -35,7 +51,14 @@ public class Utilities {
         }
     }
 
-    public static int compareTime (Chronometer time1, Chronometer time2) {
+    /**
+     * This function is to compare the the time of 2 chronometers
+     * 
+     * @param time1
+     * @param time2
+     * @return int
+     */
+    public static int compareTime(Chronometer time1, Chronometer time2) {
         if (time1.getStartTime() < time2.getStartTime()) {
             return -1;
         } else if (time1.getStartTime() > time2.getStartTime()) {
@@ -45,7 +68,13 @@ public class Utilities {
         }
     }
 
-    public static String readFile (String fileName) {
+    /**
+     * Function to read a file
+     * 
+     * @param fileName
+     * @return String
+     */
+    public static String readFile(String fileName) {
         try (FileReader reader = new FileReader(fileName)) {
             StringBuilder sb = new StringBuilder();
             int i;
@@ -59,11 +88,43 @@ public class Utilities {
         }
     }
 
-    public static void writeFile (String fileName, String content) {
+    /**
+     * Function to create a file or overwrite a file
+     * 
+     * @param fileName
+     * @param content
+     * @return void
+     */
+    public static void writeFile(String fileName, String content) {
         try (FileWriter writer = new FileWriter(fileName)) {
             writer.write(content);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Function to delete a file
+     * @param fileName
+     * @return void
+     */
+    public static void deleteFile (String fileName) {
+        File file = new File(fileName);
+        if (file.exists()) {
+            file.delete();
+        }
+    }
+
+    /**
+     * Function to transform a string into a int
+     */
+    public static int stringToInt(String str) {
+        try {
+            return Integer.parseInt(str);
+        } catch (NumberFormatException e) {
+            return -1;
+        }
+    }
+
+
 }

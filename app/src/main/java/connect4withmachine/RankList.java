@@ -9,16 +9,22 @@ import com.google.gson.JsonParser;
 import java.util.ArrayList;
 
 public class RankList {
-    // 2 ordered lists, one for the Player vs Player and the other one for the
-    // Player vs Machine
+    // 2 ordered lists, one for the Player vs Player and 
+    // the other one for the Player vs Machine
     private ArrayList<Player> playerList = new ArrayList<>();
     private ArrayList<Player> playerMachineList = new ArrayList<>();
 
+    /**
+     * Constructor
+     */
     public RankList() {
         // recover the ranking from the file
         recoverRanking();
     }
 
+    /**
+     * Getters
+     */
     public ArrayList<Player> getPlayerList() {
         return playerList;
     }
@@ -27,7 +33,13 @@ public class RankList {
         return playerMachineList;
     }
 
-    public void addPlayer(Player player) {        
+    /**
+     * This function serves for add a player to the playerList
+     * 
+     * @param player
+     * @return void
+     */
+    public void addPlayer(Player player) {
         // inster by order
         if (playerList.isEmpty()) {
             playerList.add(player);
@@ -43,6 +55,12 @@ public class RankList {
         }
     }
 
+    /**
+     * This function serves for add a player to the playerMachineList
+     * 
+     * @param player
+     * @return void
+     */
     public void addPlayerMachine(Player player) {
         // order the list by the the best time
         if (playerMachineList.isEmpty()) {
