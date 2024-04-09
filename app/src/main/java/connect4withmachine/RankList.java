@@ -111,7 +111,9 @@ public class RankList {
         try {
             // recover the ranking from the file
             Gson gson = new Gson();
+            @SuppressWarnings("deprecation")
             JsonParser parser = new JsonParser();
+            @SuppressWarnings("deprecation")
             JsonObject rankingJson = parser.parse(Utilities.readFile("ranking.json")).getAsJsonObject();
 
             // Deserialize playerList

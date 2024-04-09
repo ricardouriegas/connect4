@@ -23,6 +23,16 @@
   ],
   "playerMachineList": [
     {
+      "name": "panchito",
+      "time": {
+        "startTime": 33165161056541,
+        "stopTime": 33171430187862,
+        "running": false
+      },
+      "token": "X",
+      "isHisTurn": true
+    },
+    {
       "name": "uri",
       "time": {
         "startTime": 32899762803616,

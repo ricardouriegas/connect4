@@ -162,7 +162,9 @@ public class Game {
     public static Game loadGame(String filename) {
         try (FileReader reader = new FileReader(filename)) {
             Gson gson = new Gson();
+            @SuppressWarnings("deprecation")
             JsonParser parser = new JsonParser();
+            @SuppressWarnings("deprecation")
             JsonObject gameJson = parser.parse(reader).getAsJsonObject();
 
             // Deserialize player1
