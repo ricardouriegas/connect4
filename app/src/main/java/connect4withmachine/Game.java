@@ -22,6 +22,7 @@ public class Game {
 
     /**
      * Constructor
+     * 
      * @param player1
      * @param player2
      * @param board
@@ -101,7 +102,7 @@ public class Game {
             // enter to continue
             System.out.println("Press enter to continue");
             Utilities.readString();
-            
+
             return true;
         }
 
@@ -134,6 +135,7 @@ public class Game {
     /**
      * Save the game to a file using Gson (the file name is game.json)
      * TODO: Use Utilities.writeFile instead of FileWriter
+     * 
      * @param filename
      * @return void
      */
@@ -156,9 +158,10 @@ public class Game {
             }
 
             // Serialize board and chronometer
+            chronometer.stop();
             gameJson.add("board", gson.toJsonTree(board));
-            gameJson.addProperty("chronometerStartTime", chronometer.getStartTime());
             gameJson.addProperty("chronometerRunning", chronometer.isRunning());
+            gameJson.addProperty("startTime", chronometer.getStartTime());
 
             gson.toJson(gameJson, writer);
         } catch (IOException e) {
@@ -169,6 +172,7 @@ public class Game {
     /**
      * Load the game from the file game.json
      * TODO: Use Utilities.readFile instead of FileReader
+     * 
      * @param filename
      * @return Game (Player1, Player2, Board and Chronometer)
      */
@@ -196,10 +200,12 @@ public class Game {
             // Deserialize board and chronometer
             Board board = gson.fromJson(gameJson.get("board"), Board.class);
             Chronometer chronometer = new Chronometer();
-            chronometer.setStartTime(gameJson.get("chronometerStartTime").getAsLong());
-            if (gameJson.get("chronometerRunning").getAsBoolean()) {
-                chronometer.start();
-            }
+            chronometer.setStartTime(gameJson.get("startTime").getAsLong());
+            chronometer.start();
+
+            // if (gameJson.get("chronometerRunning").getAsBoolean()) {
+                
+            // }
 
             return new Game(player1, player2, board, chronometer);
         } catch (IOException e) {
@@ -210,7 +216,8 @@ public class Game {
 
     /**
      * Function to delete a file
-     * Use 
+     * Use
+     * 
      * @param filename
      * @return void
      */

@@ -16,7 +16,7 @@ public class Chronometer {
      * @return void
      */
     public void start() {
-        this.startTime = System.nanoTime();
+        this.startTime = System.nanoTime() + (stopTime - startTime);
         this.running = true;
     }
 
