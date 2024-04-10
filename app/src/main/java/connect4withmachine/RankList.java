@@ -182,6 +182,32 @@ public class RankList {
         }
     }
 
+    /**
+     * This function print the player vs player ranking
+     * 
+     * @return void
+     */
+    public void printPlayerList() {
+        System.out.println("===Player vs Player===");
+        for (int i = 0; i < playerList.size(); i++) {
+            System.out.println(i + 1 + ". Name: " + playerList.get(i).getName() + " \n\tTime:"
+                    + playerList.get(i).getTime().getElapsedTime());
+        }
+    }
+
+    /**
+     * This function print the player vs machine ranking
+     * 
+     * @return void
+     */
+    public void printPlayerMachineList() {
+        System.out.println("===Player vs Machine===");
+        for (int i = 0; i < playerMachineList.size(); i++) {
+            System.out.println(i + 1 + ". Name: " + playerMachineList.get(i).getName() + " \n\tTime:"
+                    + playerMachineList.get(i).getTime().getElapsedTime());
+        }
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

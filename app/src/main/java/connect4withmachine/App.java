@@ -34,7 +34,6 @@ public class App {
         // connect 4
         int opc;
         do {
-            printRanking();
             menu();
             opc = Utilities.readInt();
             switch (opc) {
@@ -45,6 +44,10 @@ public class App {
                 case 2:
                     // player vs pc
                     PlayerVsPC();
+                    break;
+                case 3:
+                    // ranking
+                    printRanking();
                     break;
             }
         } while (opc != 0);
@@ -58,6 +61,7 @@ public class App {
         System.out.println("Choose an option");
         System.out.println("1) Player vs Player");
         System.out.println("2) Player vs PC");
+        System.out.println("3) Ranking");
         System.out.println("0) Exit");
     }
 
@@ -71,7 +75,30 @@ public class App {
         System.out.println("\033[H\033[2J");
         System.out.println("=====RANKING=====");
         if (rankList.getPlayerList().size() > 0 || rankList.getPlayerMachineList().size() > 0) {
-            System.out.println(rankList);
+            int opc;
+            do {
+                System.out.println("Choose an option");
+                System.out.println("1) Player vs Player");
+                System.out.println("2) Player vs Machine");
+                System.out.println("0) Exit");
+                opc = Utilities.readInt();
+
+                switch (opc) {
+                    case 1:
+                        rankList.printPlayerList();
+                        System.out.println("Press enter to continue");
+                        Utilities.readString();
+                        break;
+                    case 2:
+                        rankList.printPlayerMachineList();
+                        System.out.println("Press enter to continue");
+                        Utilities.readString();
+                        break;
+                }
+
+                System.out.println("\033[H\033[2J");
+            } while (opc != 0);
+
         } else {
             System.out.println("No ranking yet");
         }
