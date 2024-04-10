@@ -59,6 +59,7 @@ public class Player {
         String col;
 
         System.out.println("Enter a column");
+        System.out.println("Your token is: " + getToken());
         col = Utilities.readString();
 
         if (col.equals("x") || col.equals("X")) {

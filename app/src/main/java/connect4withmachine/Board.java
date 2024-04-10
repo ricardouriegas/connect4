@@ -57,6 +57,19 @@ public class Board {
     }
 
     /**
+     * Function to check the last row
+     * @return boolean
+     */
+    public boolean checkLastRow() {
+        for (int i = 0; i < cols; i++) {
+            if (board[0][i] == ' ') {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
      * Function to check for a win (is used by isWinner function)
      * @param board
      * @param row

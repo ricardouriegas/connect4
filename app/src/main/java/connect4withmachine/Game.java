@@ -47,6 +47,19 @@ public class Game {
             if (theresAWinner(board, player1, player2))
                 return;
 
+            // check draw
+            if (board.checkLastRow()) {
+                board.printBoard();
+                System.out.println("It's a draw");
+                chronometer.stop();
+                deleteGame("game.json");
+
+                // enter to continue
+                System.out.println("Press enter to continue");
+                Utilities.readString();
+                return;
+            }
+
             board.printBoard();
             player1.setHisTurn(true);
             player2.setHisTurn(false);
@@ -59,6 +72,19 @@ public class Game {
             // check if someone won
             if (theresAWinner(board, player1, player2))
                 return;
+
+            // check draw
+            if (board.checkLastRow()) {
+                board.printBoard();
+                System.out.println("It's a draw");
+                chronometer.stop();
+                deleteGame("game.json");
+
+                // enter to continue
+                System.out.println("Press enter to continue");
+                Utilities.readString();
+                return;
+            }
 
             board.printBoard();
             player1.setHisTurn(false);
@@ -204,7 +230,7 @@ public class Game {
             chronometer.start();
 
             // if (gameJson.get("chronometerRunning").getAsBoolean()) {
-                
+
             // }
 
             return new Game(player1, player2, board, chronometer);
